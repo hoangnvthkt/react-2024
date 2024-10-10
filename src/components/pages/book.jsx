@@ -1,8 +1,6 @@
 const BookPage = () => {
     return (
-        <div>
-            book
-        </div>
+        <div>book pages</div>
     )
 }
 export default BookPage;

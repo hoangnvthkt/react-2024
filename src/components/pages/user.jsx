@@ -1,3 +1,4 @@
+import UserForm from "../user/user.form"
 import UserTable from "../user/user.table"
 
 const UserPage = () => {
@@ -5,6 +6,7 @@ const UserPage = () => {
         <div>
             UserPage
             <div>
+                <UserForm></UserForm>
                 <UserTable />
             </div>
         </div>
