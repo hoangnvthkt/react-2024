@@ -1,5 +1,6 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useState } from 'react';
+import axios from 'axios';
 const onFinish = (values) => {
     console.log('Success:', values);
 };
@@ -10,11 +11,15 @@ const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("")
+    const [phone, setPhoneNumber] = useState("")
     const handleClickBtn = () => {
-        console.log("check data", { fullName, password, email, phoneNumber })
+        const URL_BACKEND = "http://localhost:8080/api/v1/user";
+        const data = { fullName, password, email, phone };
+
+        axios.post(URL_BACKEND, data)
+        // console.log("check data", { fullName, password, email, phone })
     }
-    // console.log("check  >>", fullName, password, email, phoneNumber);
+    // console.log("check  >>", fullName, password, email, phone);
     return (
         <Form
             name="basic"
@@ -84,16 +89,16 @@ const UserForm = () => {
 
             <Form.Item
                 label="PhoneNumber"
-                name="phoneNumber"
+                name="phone"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your phoneNumber!',
+                        message: 'Please input your phone!',
                     },
                 ]}
             >
                 <Input
-                    value={phoneNumber}
+                    value={phone}
                     onChange={(event) => { setPhoneNumber(event.target.value) }}
                 />
             </Form.Item>
