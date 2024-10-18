@@ -8,7 +8,8 @@ const onFinish = (values) => {
 const onFinishFailed = (errorInfo) => {
     //console.log('Failed:', errorInfo);
 };
-const UserForm = () => {
+const UserForm = (props) => {
+    const { loadUser } = props;
     const [fullName, setFullName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ const UserForm = () => {
                 description: `Tạo user thành công`
             })
             setIsModalOpen(false)
+            await loadUser()
 
         } else {
             notification.error({

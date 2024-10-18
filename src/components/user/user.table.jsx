@@ -3,15 +3,9 @@ import { fetchAllUserAPI } from '../../services/api.service';
 import { useEffect, useState } from 'react';
 
 
-const UserTable = () => {
-    const [dataUser, setDataUser] = useState([])
-    const loadUser = async () => {
-        const res = await fetchAllUserAPI()
-        setDataUser(res.data);
-    }
-    useEffect(() => {
-        loadUser();
-    }, []);
+const UserTable = (prop) => {
+    const { dataUser } = prop
+
     const columns = [
         {
             title: 'ID',
