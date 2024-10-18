@@ -14,7 +14,7 @@ const UserTable = () => {
     }, []);
     const columns = [
         {
-            title: 'Id',
+            title: 'ID',
             dataIndex: '_id',
 
 
