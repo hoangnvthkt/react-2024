@@ -32,11 +32,7 @@ const UserForm = (props) => {
                 description: JSON.stringify(res.message)
             })
         }
-
-
-
     }
-    // console.log("check  >>", fullName, password, email, phone);
     return (
         <>
             <div>
