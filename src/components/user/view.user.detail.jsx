@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Drawer } from "antd";
-import { Form, Upload, } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+
 const ViewUserDetail = (props) => {
-    const { dataDetail, isModalViewOpen, setIsModalViewOpen } = props;
+    const { dataDetail, isModalViewOpen, setIsModalViewOpen, setDataDetail } = props;
     const [id, setId] = useState("");
     const [fullName, setFullName] = useState("");
     const [phone, setPhoneNumber] = useState("");
@@ -16,53 +15,54 @@ const ViewUserDetail = (props) => {
             setPhoneNumber(dataDetail.phone);
         }
     }, [dataDetail])
-    const normFile = (e) => {
-        if (Array.isArray(e)) {
-            return e;
-        }
-        return e?.fileList;
-    };
+
     return (
         <>
             <Drawer
                 width={"40vw"}
-                title="User detail"
+                title="Chi tiết User"
                 onClose={() => {
-                    setIsModalViewOpen(false)
-                    // setDataDetail(null)
+                    setDataDetail(null);
+                    setIsModalViewOpen(false);
                 }}
-                open={isModalViewOpen}>
-                <p>ID: {id}</p>
-                <p>FullName: {fullName}</p>
-                <p>Email: {email}</p>
-                <p>Phone: {phone}</p>
-                <div>
-                    <img height={250} width={300}
-                        src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataDetail.avatar}`} />
+                open={isModalViewOpen}
+            >
+                {dataDetail ? <>
+                        <p>Id: {dataDetail.id}</p>
+                        <br />
+                        <p>Full name: {dataDetail.fullName}</p>
+                        <br />
+                        <p>Email: {dataDetail.email}</p>
+                        <br />
+                        <p>Phone number: {dataDetail.phone}</p>
+                        <br />
+                        <p>Avatar:</p>
+                        <div>
+                            <img height={100} width={150}
+                                 src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataDetail.avatar}`} />
+                        </div>
+                        <div>
+                            <label htmlFor='btnUpload' style={{
+                                display: "block",
+                                width: "fit-content",
+                                marginTop: "15px",
+                                padding: "5px 10px",
+                                background: "orange",
+                                borderRadius: "5px",
+                                cursor: "pointer"
+                            }}>
+                                Upload Avatar
+                            </label>
+                            <input type='file' hidden id='btnUpload' />
+                        </div>
 
-                </div>
-                <Form.Item label="Upload" valuePropName="fileList" getValueFromEvent={normFile}>
-                    <Upload action="/upload.do" listType="picture-card">
-                        <button
-                            style={{
-                                border: 0,
-                                background: 'none',
-                            }}
-                            type="button"
-                        >
-                            <PlusOutlined />
-                            <div
-                                style={{
-                                    marginTop: 8,
-                                }}
-                            >
-                                Upload
-                            </div>
-                        </button>
-                    </Upload>
-                </Form.Item>
-
-
+                        {/* <Button type='primary'>Upload Avatar</Button> */}
+                    </>
+                    :
+                    <>
+                        <p>Không có dữ liệu</p>
+                    </>
+                }
             </Drawer>
 
         </>
